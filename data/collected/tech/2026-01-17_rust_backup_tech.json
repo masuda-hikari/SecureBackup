@@ -1,0 +1,66 @@
+{
+  "collection_date": "2026-01-17",
+  "category": "rust_backup_technology",
+  "libraries": {
+    "rustic": {
+      "url": "https://github.com/rustic-rs/rustic",
+      "features": ["高速", "暗号化", "重複排除", "クラウド対応", "ロックフリー操作"],
+      "status": "beta",
+      "platforms": ["Linux", "macOS", "BSD", "Windows（実験的）"]
+    },
+    "secure_backup": {
+      "url": "https://github.com/beshan/secure-backup",
+      "features": ["増分バックアップ", "AES256/Chacha20暗号化", "ファイル名暗号化"],
+      "dependency": "openssl crate"
+    },
+    "backup_suite": {
+      "url": "https://crates.io/crates/backup-suite",
+      "features": ["AES-256暗号化", "Zstd圧縮", "高速", "ローカルバックアップ"]
+    },
+    "rufendec": {
+      "url": "https://lib.rs/crates/rufendec",
+      "features": ["AES-256暗号化", "ディレクトリ構造保持", "ECB/GCMモード"],
+      "use_case": "クラウドストレージ向けファイル暗号化"
+    }
+  },
+  "encryption_libraries": {
+    "aes_crate": {
+      "url": "https://crates.io/crates/aes",
+      "description": "純Rust AES実装"
+    },
+    "aes_gcm": {
+      "url": "https://crates.io/crates/aes-gcm",
+      "description": "AES-GCM認証付き暗号化"
+    },
+    "soft_aes": {
+      "url": "https://crates.io/crates/soft-aes",
+      "features": ["CBCモード", "AES-CMAC", "PKCS#7パディング"]
+    }
+  },
+  "tauri_ecosystem": {
+    "version": "2.0",
+    "features": [
+      "デスクトップ（Windows/macOS/Linux）",
+      "モバイル（iOS/Android）",
+      "ファイルシステムプラグイン",
+      "ダイアログプラグイン",
+      "キャッシュプラグイン"
+    ],
+    "file_system_plugin": {
+      "default_permissions": ["AppConfig", "AppData", "AppLocalData", "AppCache", "AppLog"],
+      "config": "tauri.conf.json で capabilities 設定必須"
+    }
+  },
+  "recommendation": {
+    "framework": "Tauri 2.0",
+    "backend": "Rust",
+    "encryption": "aes-gcm crate (AES-256-GCM)",
+    "compression": "zstd",
+    "hash": "blake3"
+  },
+  "sources": [
+    "https://github.com/rustic-rs/rustic",
+    "https://crates.io/crates/backup-suite",
+    "https://v2.tauri.app/plugin/file-system/"
+  ]
+}

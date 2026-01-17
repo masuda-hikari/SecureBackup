@@ -1,0 +1,48 @@
+{
+  "collection_date": "2026-01-17",
+  "category": "backup_software_market",
+  "data": {
+    "global_market": {
+      "data_backup_recovery_2025": {
+        "value_usd_million": 13656.36,
+        "source": "industryresearch.biz",
+        "cagr_percent": 9.79
+      },
+      "data_backup_recovery_2034_projection": {
+        "value_usd_million": 31648.7
+      },
+      "cloud_backup_2026": {
+        "value_usd_billion": 7.93,
+        "source": "kingsresearch.com"
+      },
+      "data_protection_2026": {
+        "value_usd_million": 86890.43,
+        "cagr_percent": 9.1
+      }
+    },
+    "japan_market": {
+      "data_backup_recovery_2025": {
+        "value_usd_million": 480,
+        "market_share_percent": 5.9,
+        "cagr_percent": 7.0,
+        "growth_drivers": ["製造業", "通信業", "レガシーシステム依存"]
+      },
+      "cloud_backup_2025": {
+        "value_usd_million": 360,
+        "market_share_percent": 6.5,
+        "cagr_percent": 12.6
+      }
+    },
+    "trends": {
+      "cloud_hybrid_adoption": "新規導入の50%以上",
+      "sme_cloud_data": "SMEデータの60%以上がパブリッククラウド",
+      "cyber_security_investment": "60%の組織がバックアップ投資を推進",
+      "north_america_share": "グローバル導入の30%"
+    }
+  },
+  "sources": [
+    "https://www.industryresearch.biz/market-reports/data-backup-and-recovery-software-market-100112",
+    "https://www.kingsresearch.com/cloud-backup-market-1691",
+    "https://www.gii.co.jp/report/moi1643231-cloud-backup-market-share-analysis-industry-trends.html"
+  ]
+}

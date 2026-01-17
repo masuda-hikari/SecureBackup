@@ -1,0 +1,72 @@
+{
+  "collection_date": "2026-01-17",
+  "category": "competitor_pricing",
+  "competitors": {
+    "acronis_true_image": {
+      "pricing_model": "subscription",
+      "price_usd": 49.99,
+      "period": "year",
+      "features": ["クラウドバックアップ", "ランサムウェア保護", "Universal Restore"],
+      "tiers": {
+        "standard": {
+          "price": 49.99,
+          "storage": "ローカルのみ"
+        },
+        "advanced": {
+          "price": 89.99,
+          "storage": "250GB クラウド"
+        },
+        "premium": {
+          "price": 124.99,
+          "storage": "5TB クラウド",
+          "features": ["電子署名"]
+        }
+      },
+      "max_devices": 5,
+      "source": "bestbackupreviews.com"
+    },
+    "macrium_reflect": {
+      "pricing_model": "perpetual",
+      "workstation_price_usd": 57,
+      "home_price_usd": 55,
+      "features": ["ディスクイメージング", "増分バックアップ", "暗号化", "ランサムウェア保護"],
+      "notes": "無料版廃止、バージョン更新は約2年ごと有料",
+      "source": "macrium.com"
+    },
+    "easeus_todo_backup": {
+      "pricing_model": "subscription",
+      "price_ranges": {
+        "home": {
+          "price_usd": 29.95,
+          "period": "year",
+          "devices": 1
+        },
+        "small_business_10users": {
+          "price_usd": 199,
+          "period": "year"
+        },
+        "business_100users": {
+          "price_usd": 599,
+          "period": "year"
+        },
+        "enterprise_1000users": {
+          "price_usd": 1999,
+          "period": "year"
+        }
+      },
+      "free_version": "機能制限あり",
+      "features": ["簡単なUI", "ディスククローン", "バックアップ"],
+      "source": "itqlick.com"
+    }
+  },
+  "market_insights": {
+    "free_version_trend": "主要競合は全て無料版廃止または大幅機能制限",
+    "subscription_dominance": "サブスクリプションモデルが主流",
+    "price_range": "$29.95-$124.99/年（個人向け）"
+  },
+  "sources": [
+    "https://www.macrium.com/macrium-vs-acronis",
+    "https://www.bestbackupreviews.com/comparison/acronis-true-image-vs-easeus-todo-backup/",
+    "https://www.itqlick.com/easeus-todo-backup-software/pricing"
+  ]
+}

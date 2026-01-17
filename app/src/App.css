@@ -1,0 +1,470 @@
+/* SecureBackup - メインスタイル */
+
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-500: #6b7280;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  font-family: 'Segoe UI', 'Meiryo UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray-800);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+/* カード */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  color: var(--gray-800);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gray-100);
+}
+
+/* フォーム */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  margin-bottom: 0.5rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: var(--gray-50);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+input[readonly] {
+  cursor: pointer;
+}
+
+/* ボタン */
+button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--gray-200);
+  color: var(--gray-700);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--gray-300);
+}
+
+/* チェックボックス */
+.checkbox-group {
+  margin-bottom: 0.75rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.checkbox-label:hover {
+  background: var(--gray-50);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.checkbox-label span {
+  font-size: 0.9rem;
+  color: var(--gray-700);
+}
+
+/* パスワード強度 */
+.password-group {
+  margin-left: 2rem;
+  padding: 1rem;
+  background: var(--gray-50);
+  border-radius: 8px;
+}
+
+.password-strength {
+  margin-top: 0.75rem;
+}
+
+.strength-bar {
+  height: 4px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  margin-bottom: 0.5rem;
+}
+
+.suggestions {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.suggestions li {
+  padding: 0.25rem 0;
+}
+
+.suggestions li::before {
+  content: '• ';
+  color: var(--gray-400);
+}
+
+/* スキャン結果 */
+.scan-result {
+  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+  border: 1px solid #bae6fd;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 進捗表示 */
+.progress-section {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #fcd34d;
+}
+
+.progress-bar-container {
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--gray-700);
+}
+
+.current-file {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  margin-top: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-badge {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--gray-800);
+  color: white;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* 結果表示 */
+.result-section.success {
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+  border: 1px solid #6ee7b7;
+}
+
+.result-section.failed {
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 1px solid #f87171;
+}
+
+.error-detail {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 6px;
+  color: var(--danger);
+  font-size: 0.875rem;
+}
+
+/* エラーボックス */
+.error-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  color: var(--danger);
+  font-size: 0.875rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-size: 1.25rem;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.close-btn:hover {
+  opacity: 1;
+}
+
+/* アクションボタン */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.action-buttons button {
+  min-width: 150px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+/* フッター */
+.footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--gray-100);
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  }
+
+  .card {
+    background: var(--gray-800);
+    border: 1px solid var(--gray-700);
+  }
+
+  .card h2 {
+    color: var(--gray-100);
+    border-color: var(--gray-700);
+  }
+
+  .form-group label {
+    color: var(--gray-300);
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    background: var(--gray-900);
+    border-color: var(--gray-600);
+    color: var(--gray-100);
+  }
+
+  .btn-secondary {
+    background: var(--gray-700);
+    color: var(--gray-200);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: var(--gray-600);
+  }
+
+  .checkbox-label:hover {
+    background: var(--gray-700);
+  }
+
+  .checkbox-label span {
+    color: var(--gray-300);
+  }
+
+  .password-group {
+    background: var(--gray-900);
+  }
+
+  .stat-item {
+    background: var(--gray-900);
+  }
+
+  .stat-value {
+    color: var(--gray-100);
+  }
+
+  .scan-result {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 100%);
+    border-color: #3b82f6;
+  }
+
+  .progress-section {
+    background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+    border-color: #f59e0b;
+  }
+
+  .result-section.success {
+    background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+    border-color: #10b981;
+  }
+
+  .result-section.failed {
+    background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+    border-color: #ef4444;
+  }
+
+  .error-box {
+    background: rgba(127, 29, 29, 0.3);
+    border-color: #b91c1c;
+  }
+}
+
+/* レスポンシブ */
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons button {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
