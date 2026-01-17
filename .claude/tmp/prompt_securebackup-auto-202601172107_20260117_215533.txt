@@ -1,0 +1,29 @@
+﻿プロジェクトの進捗を進めてください。
+
+★★★ 最終目標: このプロジェクト単体で現金収入1000万円 ★★★
+
+**優先タスク**: 収益化進捗確認: STATUS.mdを更新し、1000万円目標に向けた次のアクションを設定
+
+実行手順:
+1. STATUS.mdとCLAUDE.mdを読み、現状を把握
+2. 上記タスクを実装（1000万円達成に向けた一歩として）
+3. テストを実行して動作確認
+4. STATUS.mdに進捗を記録
+5. 【必須】「次のアクション」セクションを更新（空欄禁止・タスク生成の源泉）
+
+重要:
+- 1000万円に到達するまで作業は永続的に継続される
+- 必ず「次のアクション」を設定すること（これがないとタスク生成が停止する）
+
+出力JSON形式:
+{
+  "task_id": "<task_id>",
+  "summary": "<実施内容の要約>",
+  "monetization_link": "<この作業が収益化にどう繋がるか>",
+  "outputs": [{"path":"<変更ファイル>","description":"<変更内容>"}],
+  "ai_self_review":{"quality":"OK|NG","issues":[],"confidence":0.0-1.0},
+  "verification":{"checks":["<確認項目>"],"result":"PASS|FAIL"},
+  "failure_classification":"none|waiting_human|quality|infrastructure|unknown",
+  "human_question": {"type":"clarification","summary":"<質問要約>","detail":"<詳細>","options":[{"label":"A","description":"選択肢A"}]} または null,
+  "next_action":"<次に必要なアクション>"
+}
