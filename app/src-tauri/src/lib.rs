@@ -4,6 +4,7 @@
 //! - AES-256-GCM暗号化
 //! - BLAKE3ハッシュによる差分検出
 //! - Zstd圧縮
+//! - 復元機能（暗号化ファイルの復号・解凍）
 //! - クロスプラットフォーム対応
 
 mod backup;
@@ -20,11 +21,16 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .manage(AppState::default())
         .invoke_handler(tauri::generate_handler![
+            // バックアップ関連
             commands::scan_directory,
             commands::execute_backup,
             commands::get_progress,
             commands::check_password,
             commands::format_file_size,
+            // 復元関連
+            commands::get_backup_info,
+            commands::execute_restore,
+            commands::get_restore_progress,
         ])
         .run(tauri::generate_context!())
         .expect("SecureBackupの起動に失敗しました");

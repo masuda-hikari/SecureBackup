@@ -1,6 +1,9 @@
 //! Tauriコマンド - フロントエンドとのインターフェース
 
-use crate::backup::{BackupConfig, BackupExecutor, BackupProgress, DirectoryScanner, ScanResult};
+use crate::backup::{
+    BackupConfig, BackupExecutor, BackupProgress, DirectoryScanner, ScanResult,
+    RestoreConfig, RestoreExecutor, RestoreProgress, load_backup_manifest, BackupInfo,
+};
 use crate::crypto::{Encryptor, PasswordStrength};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -9,8 +12,11 @@ use tauri::State;
 
 /// アプリケーション状態
 pub struct AppState {
-    /// 現在の進捗
+    /// 現在のバックアップ進捗
     pub progress: Arc<Mutex<Option<BackupProgress>>>,
+
+    /// 現在の復元進捗
+    pub restore_progress: Arc<Mutex<Option<RestoreProgress>>>,
 
     /// 最後のスキャン結果
     pub last_scan: Arc<Mutex<Option<ScanResult>>>,
@@ -20,6 +26,7 @@ impl Default for AppState {
     fn default() -> Self {
         Self {
             progress: Arc::new(Mutex::new(None)),
+            restore_progress: Arc::new(Mutex::new(None)),
             last_scan: Arc::new(Mutex::new(None)),
         }
     }
@@ -295,5 +302,194 @@ pub fn format_file_size(bytes: u64) -> String {
         format!("{:.2} KB", bytes as f64 / KB as f64)
     } else {
         format!("{} bytes", bytes)
+    }
+}
+
+// ========================================
+// 復元関連コマンド
+// ========================================
+
+/// 復元リクエスト
+#[derive(Debug, Deserialize)]
+pub struct RestoreRequest {
+    /// バックアップディレクトリ
+    pub backup_dir: String,
+
+    /// 復元先ディレクトリ
+    pub restore_dir: String,
+
+    /// 復元するファイル（空の場合は全ファイル）
+    pub files: Vec<String>,
+
+    /// パスワード（暗号化バックアップの場合）
+    pub password: Option<String>,
+
+    /// 既存ファイルを上書きするか
+    pub overwrite: bool,
+}
+
+/// 復元レスポンス
+#[derive(Debug, Serialize)]
+pub struct RestoreResponse {
+    pub success: bool,
+    pub restored_files: usize,
+    pub restored_bytes: u64,
+    pub skipped_files: usize,
+    pub duration_secs: f64,
+    pub error: Option<String>,
+}
+
+/// バックアップ情報レスポンス
+#[derive(Debug, Serialize)]
+pub struct BackupInfoResponse {
+    pub success: bool,
+    pub info: Option<BackupInfo>,
+    pub files: Vec<BackupFileInfo>,
+    pub error: Option<String>,
+}
+
+/// バックアップファイル情報
+#[derive(Debug, Serialize)]
+pub struct BackupFileInfo {
+    pub path: String,
+    pub original_size: u64,
+    pub backed_up_size: u64,
+    pub encrypted: bool,
+    pub modified: String,
+}
+
+/// バックアップ情報を取得
+#[tauri::command]
+pub async fn get_backup_info(backup_dir: String) -> Result<BackupInfoResponse, String> {
+    let path = PathBuf::from(&backup_dir);
+
+    match load_backup_manifest(&path) {
+        Ok(manifest) => {
+            let info = BackupInfo::from(&manifest);
+
+            let files: Vec<BackupFileInfo> = manifest.files.values()
+                .map(|entry| BackupFileInfo {
+                    path: entry.path.clone(),
+                    original_size: entry.original_size,
+                    backed_up_size: entry.backed_up_size,
+                    encrypted: entry.encrypted,
+                    modified: entry.modified.to_rfc3339(),
+                })
+                .collect();
+
+            Ok(BackupInfoResponse {
+                success: true,
+                info: Some(info),
+                files,
+                error: None,
+            })
+        }
+        Err(e) => Ok(BackupInfoResponse {
+            success: false,
+            info: None,
+            files: vec![],
+            error: Some(e.to_string()),
+        }),
+    }
+}
+
+/// 復元を実行
+#[tauri::command]
+pub async fn execute_restore(
+    request: RestoreRequest,
+    state: State<'_, AppState>,
+) -> Result<RestoreResponse, String> {
+    let config = RestoreConfig {
+        backup_dir: PathBuf::from(&request.backup_dir),
+        restore_dir: PathBuf::from(&request.restore_dir),
+        files: request.files,
+        overwrite: request.overwrite,
+    };
+
+    let progress_state = state.restore_progress.clone();
+
+    let mut executor = RestoreExecutor::new(config);
+
+    // パスワードが指定されている場合
+    if let Some(password) = &request.password {
+        executor = executor.with_password(password);
+    }
+
+    // 進捗コールバックを設定
+    executor = executor.with_progress_callback(move |progress| {
+        *progress_state.lock().unwrap() = Some(progress);
+    });
+
+    let start = std::time::Instant::now();
+
+    match executor.execute() {
+        Ok(result) => {
+            let duration = start.elapsed().as_secs_f64();
+
+            // 進捗をクリア
+            *state.restore_progress.lock().unwrap() = None;
+
+            Ok(RestoreResponse {
+                success: result.success,
+                restored_files: result.restored_files,
+                restored_bytes: result.restored_bytes,
+                skipped_files: result.skipped_files,
+                duration_secs: duration,
+                error: if result.failed_files.is_empty() {
+                    None
+                } else {
+                    Some(format!("{}個のファイルでエラー: {}", result.failed_files.len(), result.failed_files.join(", ")))
+                },
+            })
+        }
+        Err(e) => {
+            *state.restore_progress.lock().unwrap() = None;
+
+            Ok(RestoreResponse {
+                success: false,
+                restored_files: 0,
+                restored_bytes: 0,
+                skipped_files: 0,
+                duration_secs: start.elapsed().as_secs_f64(),
+                error: Some(e.to_string()),
+            })
+        }
+    }
+}
+
+/// 復元の進捗を取得
+#[tauri::command]
+pub fn get_restore_progress(state: State<'_, AppState>) -> ProgressResponse {
+    let progress = state.restore_progress.lock().unwrap();
+
+    match &*progress {
+        Some(p) => {
+            let percentage = if p.total_files > 0 {
+                (p.processed_files as f64 / p.total_files as f64) * 100.0
+            } else {
+                0.0
+            };
+
+            ProgressResponse {
+                active: true,
+                processed_files: p.processed_files,
+                total_files: p.total_files,
+                processed_bytes: p.processed_bytes,
+                total_bytes: p.total_bytes,
+                current_file: p.current_file.clone(),
+                status: format!("{:?}", p.status),
+                percentage,
+            }
+        }
+        None => ProgressResponse {
+            active: false,
+            processed_files: 0,
+            total_files: 0,
+            processed_bytes: 0,
+            total_bytes: 0,
+            current_file: None,
+            status: "Idle".to_string(),
+            percentage: 0.0,
+        },
     }
 }
