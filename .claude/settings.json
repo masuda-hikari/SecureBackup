@@ -1,0 +1,28 @@
+﻿{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(pip:*)",
+      "Bash(pytest:*)",
+      "Bash(git:*)",
+      "Bash(black:*)",
+      "Bash(isort:*)",
+      "Bash(mypy:*)",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep"
+    ],
+    "deny": []
+  },
+  "environment": {
+    "python_version": ">=3.11",
+    "platform": "windows"
+  },
+  "project": {
+    "description": "SecureBackup - AI automation project",
+    "name": "SecureBackup",
+    "type": "python"
+  }
+}
