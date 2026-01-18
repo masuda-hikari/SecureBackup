@@ -1,0 +1,22 @@
+﻿## 情報収集タスク: 競合情報収集
+
+### 対象カテゴリ
+competitor
+
+### 実行手順
+1. WebSearch/WebFetchを使用して最新情報を収集
+2. 収集結果を data/collected/competitor/2026-01-19.json に保存
+3. 収集した情報を基に、関連ファイル（README.md、記事等）の更新が必要か判断
+4. 必要に応じてコンテンツを最新化
+5. STATUS.mdに収集結果サマリーと次回収集予定を記載
+
+### 出力必須フィールド（info_collection）
+- searches_performed: 実行した検索クエリのリスト
+- sources_used: 使用した情報源URLのリスト
+- data_freshness: 収集データの鮮度（日数）
+- next_collection_scheduled: 次回収集予定日
+
+### 品質基準
+- 一次ソース（政府統計、公式発表）を優先
+- 出典URLと取得日を必ず記録
+- 6ヶ月以上前のデータは再収集対象としてフラグ
