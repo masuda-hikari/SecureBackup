@@ -1,5 +1,34 @@
 # SecureBackup 開発ログ
 
+## 2026-01-18: v0.1.0 GitHub Releaseリリース
+
+### 実施内容
+1. **インストーラー生成**
+   - `npm run tauri build` によるリリースビルド
+   - NSISインストーラー: `SecureBackup_0.1.0_x64-setup.exe`
+   - MSIインストーラー: `SecureBackup_0.1.0_x64_en-US.msi`
+
+2. **ドキュメント作成**
+   - CHANGELOG.md: v0.1.0のリリースノート
+   - README.md: プロジェクト説明、インストール手順、使い方
+
+3. **GitHub Release公開**
+   - URL: https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.0
+   - 2つのインストーラーをアップロード
+
+### 変更ファイル
+- `CHANGELOG.md` - 新規作成
+- `README.md` - 新規作成
+- `STATUS.md` - リリース完了に更新
+
+### 次回アクション（優先順）
+1. **ランディングページ作成** - GitHub Pages / Vercelでプロモーションサイト
+2. **SEO対策** - バックアップツール関連キーワード最適化
+3. **スケジュール実行** - cron/タスクスケジューラ連携
+4. **Pro版機能追加** - クラウド連携（Google Drive/OneDrive）
+
+---
+
 ## 2026-01-18: フロントエンド復元UI実装完了
 
 ### 実施内容

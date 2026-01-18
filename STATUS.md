@@ -6,10 +6,11 @@
 
 | 項目 | 状態 |
 |------|------|
-| 進捗 | フロントエンド復元UI完成 |
-| フェーズ | Phase 1（ローカルバックアップ+復元）完了 |
+| 進捗 | **v0.1.0リリース完了** |
+| フェーズ | Phase 1（ローカルバックアップ+復元）完了 → 配布済み |
 | テスト | 全10件PASS |
 | ビルド | 成功（Rust + React） |
+| リリース | https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.0 |
 
 ## 完了タスク
 - [x] 市場調査・競合分析
@@ -21,9 +22,10 @@
 - [x] 復元モジュール（restore.rs）
 - [x] 復元用Tauriコマンド（execute_restore, get_backup_info, get_restore_progress）
 - [x] フロントエンド復元UI（タブ切り替え、ファイル選択、進捗表示）
+- [x] GitHub Releases v0.1.0 公開
 
 ## 次回アクション
-**GitHub Releases配布準備** → インストーラー生成（tauri build）とリリースノート作成
+**ランディングページ作成** → GitHub Pages / Vercel でプロモーションサイト構築、SEO対策
 
 ## 技術スタック
 - Tauri 2.0 (Rust + React/TypeScript)
