@@ -1,5 +1,57 @@
 # SecureBackup 開発ログ
 
+## 2026-01-19: ランディングページ作成・SNS告知準備
+
+### 実施内容
+1. **ランディングページ作成**（docs/index.html）
+   - SEO最適化済みHTML（OGP, Twitter Card, Schema.org）
+   - レスポンシブデザイン対応
+   - ダークモード対応（prefers-color-scheme）
+   - 機能紹介セクション
+   - 他ツール比較表（BunBackup, EaseUS）
+   - 価格プラン（Free / Pro）
+   - ダウンロードセクション
+   - FAQ（5項目）
+   - robots.txt / sitemap.xml
+
+2. **SNS告知用コンテンツ作成**（docs/social-posts.md）
+   - X(Twitter)投稿テンプレート（日本語3件/英語1件）
+   - Reddit投稿テンプレート（r/rust, r/windows）
+   - Qiita/Zenn記事アウトライン
+   - プレスリリーステンプレート
+   - ハッシュタグリスト
+
+3. **バージョン番号更新（0.1.0 → 0.1.1）**
+   - app/src-tauri/Cargo.toml
+   - app/package.json
+   - app/src-tauri/tauri.conf.json
+
+### 生成ファイル
+- `docs/index.html` - ランディングページ（約600行）
+- `docs/robots.txt` - 検索エンジン設定
+- `docs/sitemap.xml` - サイトマップ
+- `docs/.nojekyll` - Jekyll無効化
+- `docs/social-posts.md` - SNS告知テンプレート
+
+### 市場調査結果（WebSearch）
+- 日本のバックアップフリーソフト市場で主要競合：
+  - BunBackup（日本製、シンプル）
+  - EaseUS Todo Backup Free（機能豊富）
+  - AOMEI Backupper Standard（直感的UI）
+- SecureBackupの差別化ポイント：
+  - Zstd圧縮対応（競合は未対応）
+  - オープンソース
+  - Tauri製の軽量アプリ（2.5MB）
+  - モダンUI + ダークモード
+
+### 次回アクション（優先順）
+1. **GitHub Pagesデプロイ設定** - リポジトリSettings → Pages → Source: master/docs
+2. **v0.1.1リリースビルド** - npm run tauri build 実行
+3. **SNS告知実行** - social-posts.mdのコンテンツを投稿
+4. **Phase 2機能** - クラウドバックアップ対応
+
+---
+
 ## 2026-01-18: UI/UXエクセレンス対応 v0.1.1
 
 ### 実施内容

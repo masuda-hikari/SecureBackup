@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecureBackup - AES-256暗号化対応の差分バックアップツール。Windows対応フリーソフト。大切なデータを安全に自動バックアップ。">
+    <meta name="keywords" content="バックアップ, 暗号化, Windows, フリーソフト, AES-256, 差分バックアップ, データ保護, セキュリティ">
+    <meta name="author" content="mmasu">
+    <meta name="robots" content="index, follow">
+
+    <!-- OGP -->
+    <meta property="og:title" content="SecureBackup - 暗号化対応バックアップツール">
+    <meta property="og:description" content="AES-256暗号化対応の差分バックアップツール。大切なデータを安全に自動バックアップ。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://masuda-hikari.github.io/SecureBackup/">
+    <meta property="og:image" content="https://masuda-hikari.github.io/SecureBackup/ogp.png">
+    <meta property="og:locale" content="ja_JP">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SecureBackup - 暗号化対応バックアップツール">
+    <meta name="twitter:description" content="AES-256暗号化対応の差分バックアップツール。大切なデータを安全に自動バックアップ。">
+    <meta name="twitter:image" content="https://masuda-hikari.github.io/SecureBackup/ogp.png">
+
+    <title>SecureBackup - AES-256暗号化対応 差分バックアップツール | Windows フリーソフト</title>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "SecureBackup",
+        "operatingSystem": "Windows",
+        "applicationCategory": "UtilitiesApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "JPY"
+        },
+        "description": "AES-256暗号化対応の差分バックアップツール。大切なデータを安全に自動バックアップ。",
+        "softwareVersion": "0.1.0",
+        "downloadUrl": "https://github.com/masuda-hikari/SecureBackup/releases/latest"
+    }
+    </script>
+
+    <link rel="canonical" href="https://masuda-hikari.github.io/SecureBackup/">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --background: #ffffff;
+            --surface: #f8fafc;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary: #3b82f6;
+                --primary-dark: #2563eb;
+                --secondary: #34d399;
+                --background: #0f172a;
+                --surface: #1e293b;
+                --text: #f1f5f9;
+                --text-muted: #94a3b8;
+                --border: #334155;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Meiryo UI', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Header */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--surface) 0%, var(--background) 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Features */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* Screenshots */
+        .screenshots {
+            padding: 6rem 2rem;
+            background: var(--surface);
+        }
+
+        .screenshots-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .screenshot-wrapper {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Comparison */
+        .comparison {
+            padding: 6rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--surface);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--surface);
+        }
+
+        .check {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #ef4444;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 6rem 2rem;
+            background: var(--surface);
+        }
+
+        .pricing-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'おすすめ';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: var(--text-muted);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Download */
+        .download {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .download-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .download-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            border-color: var(--primary);
+            background: var(--background);
+        }
+
+        .download-info {
+            text-align: left;
+        }
+
+        .download-info strong {
+            display: block;
+        }
+
+        .download-info span {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 6rem 2rem;
+            background: var(--surface);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.25rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .faq-answer {
+            padding: 0 1.25rem 1.25rem;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .faq-item.open .faq-answer {
+            display: block;
+        }
+
+        .faq-item.open .faq-question::after {
+            content: '−';
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 4rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content,
+        .feature-card,
+        .pricing-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 32 32" fill="currentColor">
+                    <path d="M16 2L4 8v8c0 7.73 5.12 14.95 12 16 6.88-1.05 12-8.27 12-16V8L16 2zm0 4l8 4v6c0 5.52-3.65 10.67-8 11.72V6z"/>
+                </svg>
+                SecureBackup
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">機能</a></li>
+                <li><a href="#pricing">価格</a></li>
+                <li><a href="#download">ダウンロード</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="https://github.com/masuda-hikari/SecureBackup" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">v0.1.0 リリース</span>
+                <h1>大切なデータを<br>安全に自動バックアップ</h1>
+                <p class="hero-description">
+                    AES-256暗号化対応の差分バックアップツール。<br>
+                    軽量・高速・安全にファイルを保護します。
+                </p>
+                <div class="cta-buttons">
+                    <a href="https://github.com/masuda-hikari/SecureBackup/releases/latest" class="btn btn-primary">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 0a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0110 4.84c.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0010 0z"/>
+                        </svg>
+                        無料ダウンロード
+                    </a>
+                    <a href="#features" class="btn btn-secondary">機能を見る</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <h2 class="section-title">主な機能</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>AES-256暗号化</h3>
+                    <p>軍事レベルのAES-256-GCM暗号化で、バックアップデータを完全に保護。パスワードなしでは絶対に復元できません。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>差分バックアップ</h3>
+                    <p>BLAKE3ハッシュによる高速差分検出。変更されたファイルのみをバックアップし、時間とストレージを節約。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Zstd圧縮</h3>
+                    <p>最新のZstd圧縮アルゴリズムでバックアップサイズを大幅削減。高速かつ高圧縮率を実現。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>シンプルなUI</h3>
+                    <p>直感的な操作で誰でも簡単にバックアップ。複雑な設定は不要、すぐに使い始められます。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>軽量・高速</h3>
+                    <p>Rust製の高性能バックエンド。2.5MB以下のインストーラーで、システムリソースを最小限に抑えます。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌙</div>
+                    <h3>ダークモード</h3>
+                    <p>システム設定に連動したダークモード対応。目に優しいインターフェースで長時間の作業も快適。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots Section -->
+        <section class="screenshots">
+            <div class="screenshots-container">
+                <h2 class="section-title">スクリーンショット</h2>
+                <div class="screenshot-wrapper">
+                    <div class="screenshot-placeholder">
+                        SecureBackup v0.1.0<br>
+                        バックアップ・復元画面
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison" id="comparison">
+            <h2 class="section-title">他ツールとの比較</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>機能</th>
+                        <th>SecureBackup</th>
+                        <th>BunBackup</th>
+                        <th>EaseUS Free</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>AES-256暗号化</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>差分バックアップ</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Zstd圧縮</td>
+                        <td class="check">✓</td>
+                        <td class="cross">×</td>
+                        <td class="cross">×</td>
+                    </tr>
+                    <tr>
+                        <td>モダンUI</td>
+                        <td class="check">✓</td>
+                        <td class="cross">×</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>ダークモード</td>
+                        <td class="check">✓</td>
+                        <td class="cross">×</td>
+                        <td class="cross">×</td>
+                    </tr>
+                    <tr>
+                        <td>軽量（5MB以下）</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="cross">×</td>
+                    </tr>
+                    <tr>
+                        <td>オープンソース</td>
+                        <td class="check">✓</td>
+                        <td class="cross">×</td>
+                        <td class="cross">×</td>
+                    </tr>
+                    <tr>
+                        <td>完全無料</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                        <td class="cross">制限あり</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing" id="pricing">
+            <div class="pricing-container">
+                <h2 class="section-title">価格プラン</h2>
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <h3>Free</h3>
+                        <div class="price">¥0 <span>永久無料</span></div>
+                        <ul class="pricing-features">
+                            <li>ローカルバックアップ</li>
+                            <li>AES-256暗号化</li>
+                            <li>差分バックアップ</li>
+                            <li>Zstd圧縮</li>
+                            <li>個別ファイル復元</li>
+                            <li>ダークモード</li>
+                        </ul>
+                        <a href="https://github.com/masuda-hikari/SecureBackup/releases/latest" class="btn btn-primary" style="width: 100%;">
+                            無料ダウンロード
+                        </a>
+                    </div>
+                    <div class="pricing-card featured">
+                        <h3>Pro</h3>
+                        <div class="price">$5 <span>/月</span></div>
+                        <ul class="pricing-features">
+                            <li>Free版の全機能</li>
+                            <li>クラウドバックアップ対応</li>
+                            <li>Google Drive連携</li>
+                            <li>OneDrive連携</li>
+                            <li>スケジュール実行</li>
+                            <li>優先サポート</li>
+                        </ul>
+                        <button class="btn btn-secondary" style="width: 100%;" disabled>
+                            近日公開
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section class="download" id="download">
+            <div class="download-container">
+                <h2 class="section-title">ダウンロード</h2>
+                <p>Windows 10/11 (64bit) 対応</p>
+                <div class="download-options">
+                    <a href="https://github.com/masuda-hikari/SecureBackup/releases/download/v0.1.0/SecureBackup_0.1.0_x64-setup.exe" class="download-btn">
+                        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 12l9-9v6h9v6h-9v6L3 12z"/>
+                        </svg>
+                        <div class="download-info">
+                            <strong>EXEインストーラー</strong>
+                            <span>推奨 / 約2.5MB</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/masuda-hikari/SecureBackup/releases/download/v0.1.0/SecureBackup_0.1.0_x64_en-US.msi" class="download-btn">
+                        <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                        </svg>
+                        <div class="download-info">
+                            <strong>MSIインストーラー</strong>
+                            <span>企業向け / 約4.1MB</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="faq-container">
+                <h2 class="section-title">よくある質問</h2>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        本当に無料ですか？
+                    </button>
+                    <div class="faq-answer">
+                        はい、ローカルバックアップ機能はすべて無料でお使いいただけます。将来的にクラウド連携などの追加機能をPro版として提供予定ですが、現在の機能は永久無料です。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        暗号化は安全ですか？
+                    </button>
+                    <div class="faq-answer">
+                        AES-256-GCMは世界標準の暗号化方式で、政府機関や金融機関でも採用されています。パスワードを忘れない限り、第三者がデータを復元することは事実上不可能です。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        どのくらいのファイルサイズに対応していますか？
+                    </button>
+                    <div class="faq-answer">
+                        現在は中規模のファイル（数百MB程度）に最適化されています。大容量ファイル（1GB以上）のストリーミング処理は今後のアップデートで対応予定です。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Mac/Linuxに対応していますか？
+                    </button>
+                    <div class="faq-answer">
+                        現在はWindows版のみです。Tauriフレームワークはクロスプラットフォームをサポートしているため、将来的にMac/Linux版も検討しています。
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        オープンソースですか？
+                    </button>
+                    <div class="faq-answer">
+                        はい、GitHubでソースコードを公開しています。セキュリティの透明性を重視し、誰でもコードを検証できます。
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/masuda-hikari/SecureBackup">GitHub</a>
+            <a href="https://github.com/masuda-hikari/SecureBackup/issues">バグ報告</a>
+            <a href="https://github.com/masuda-hikari/SecureBackup/releases">リリースノート</a>
+        </div>
+        <p class="copyright">
+            &copy; 2026 SecureBackup. All rights reserved.
+        </p>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const item = button.parentElement;
+                item.classList.toggle('open');
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

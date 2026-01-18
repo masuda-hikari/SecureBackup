@@ -2,6 +2,35 @@
 
 All notable changes to SecureBackup will be documented in this file.
 
+## [0.1.1] - 2026-01-19
+
+### Added
+- **ランディングページ**
+  - GitHub Pages用プロモーションサイト（docs/index.html）
+  - SEOメタデータ最適化（OGP, Twitter Card, Schema.org）
+  - レスポンシブデザイン・ダークモード対応
+  - robots.txt / sitemap.xml
+
+### Improved
+- **UI/UXエクセレンス対応**
+  - Nielsen 10 Heuristics準拠
+  - トースト通知システム（成功/エラー/警告/情報）
+  - 確認ダイアログ（バックアップ/復元前）
+  - キーボードショートカット（Ctrl+1/2/B/R/S/?）
+  - ヘルプモーダル（ショートカット一覧/機能説明）
+  - パスワード表示/非表示トグル
+
+- **アクセシビリティ（WCAG準拠）**
+  - コントラスト比4.5:1以上
+  - タップターゲット48px以上
+  - ARIA属性追加
+  - 高コントラストモード対応
+  - モーション低減対応
+
+- **日本市場配慮**
+  - 日本語フォントスタック最適化
+  - 可読性向上（line-height: 1.7）
+
 ## [0.1.0] - 2026-01-18
 
 ### Added

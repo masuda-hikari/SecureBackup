@@ -1,16 +1,35 @@
-﻿﻿﻿﻿# プロジェクトステータス
+# プロジェクトステータス
 
-最終更新: 2026-01-18
+最終更新: 2026-01-19
 
 ## 概要
 
 | 項目 | 状態 |
 |------|------|
-| 進捗 | **Phase 1 完了・v0.1.1 UI/UX改善版準備中** |
-| フェーズ | Phase 1（ローカルバックアップ+復元）完了 |
+| 進捗 | **v0.1.1 リリース準備完了** |
+| フェーズ | Phase 1（ローカルバックアップ+復元）完了 → マーケティング段階 |
 | テスト | 全10件PASS |
 | ビルド | 成功（Rust + React） |
-| リリース | ✅ **v0.1.0公開済み**（v0.1.1準備中） |
+| リリース | ✅ v0.1.0公開済み / v0.1.1準備完了 |
+
+## ✅ v0.1.1 新機能（2026-01-19）
+
+### ランディングページ（docs/）
+| 項目 | 状態 |
+|------|------|
+| index.html | ✅ 作成完了 |
+| SEOメタデータ（OGP/Twitter Card/Schema.org） | ✅ 設定完了 |
+| robots.txt / sitemap.xml | ✅ 作成完了 |
+| レスポンシブデザイン | ✅ 対応 |
+| ダークモード | ✅ 対応 |
+| FAQ | ✅ 5項目 |
+
+### SNS告知用コンテンツ
+- docs/social-posts.md 作成完了
+- X(Twitter)日本語/英語投稿
+- Reddit投稿（r/rust, r/windows）
+- Qiita/Zenn記事アウトライン
+- プレスリリーステンプレート
 
 ## ✅ v0.1.1 UI/UXエクセレンス対応（2026-01-18）
 
@@ -38,13 +57,13 @@
 | 高コントラストモード | ✅ |
 | モーション低減対応 | ✅ |
 
-## ✅ リリース完了（2026-01-18）
+## ✅ リリース状況
 
 | 項目 | 状態 |
 |------|------|
 | リポジトリ公開状態 | ✅ **Public** |
-| GitHub Releases | ✅ **v0.1.0公開済み** |
-| インストーラー | ✅ **.exe / .msi アップロード済み** |
+| GitHub Releases v0.1.0 | ✅ **公開済み** |
+| ランディングページ | ✅ **docs/作成完了** |
 | リリースURL | https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.0 |
 
 ### ダウンロード
@@ -65,14 +84,28 @@
 - [x] フロントエンド復元UI
 - [x] GitHub Releases v0.1.0 公開
 - [x] リポジトリPublic化
-- [x] **UI/UXエクセレンス対応**（Nielsen 10 Heuristics + WCAG準拠）
+- [x] UI/UXエクセレンス対応（Nielsen 10 Heuristics + WCAG準拠）
+- [x] ランディングページ作成（docs/index.html）
+- [x] SEO最適化（OGP/Twitter Card/Schema.org）
+- [x] SNS告知用コンテンツ作成
 
-## 次回アクション（Phase 2準備）
-1. **v0.1.1リリース** → UI/UX改善版のGitHub Releases公開
-2. **ランディングページ作成** → GitHub Pages / Vercelで公開
-3. **SEO最適化** → キーワード「Windows バックアップ 暗号化」対策
-4. **マーケティング** → SNS告知、テックブログ投稿
-5. **Phase 2機能** → クラウドバックアップ（AWS S3/Google Drive連携）
+## 次回アクション（優先順）
+
+1. **GitHub Pagesデプロイ設定**
+   - リポジトリSettings → Pages → Source: master/docs
+   - URL: https://masuda-hikari.github.io/SecureBackup/
+
+2. **v0.1.1リリース**
+   - バージョン番号更新済み（Cargo.toml, package.json, tauri.conf.json）
+   - リリースビルド実行 → GitHub Releases公開
+
+3. **SNS告知実行**
+   - docs/social-posts.md のコンテンツを使用
+   - X(Twitter), Reddit投稿
+
+4. **Phase 2機能**
+   - クラウドバックアップ（AWS S3/Google Drive連携）
+   - スケジュール実行（Windowsタスクスケジューラ連携）
 
 ## 技術スタック
 - Tauri 2.0 (Rust + React/TypeScript)
@@ -83,7 +116,7 @@
 ## 収益化ステータス
 - 目標: ¥10,000/月 (Phase 1)
 - 価格設定: 無料版 + Pro月額$5
-- 進捗: **v0.1.0公開完了、マーケティング段階**
+- 進捗: **v0.1.0公開完了 → ランディングページ作成完了 → マーケティング段階**
 
 ## 実装済み機能
 
@@ -116,3 +149,7 @@
 | ダークモード対応 | ✅ |
 | レスポンシブデザイン | ✅ |
 | エラー表示 | ✅ |
+| トースト通知 | ✅ |
+| 確認ダイアログ | ✅ |
+| キーボードショートカット | ✅ |
+| ヘルプモーダル | ✅ |
