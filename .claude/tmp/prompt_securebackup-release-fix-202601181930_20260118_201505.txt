@@ -1,0 +1,72 @@
+﻿【SecureBackup リリース修正タスク】
+
+## 問題
+STATUS.mdに「v0.1.0リリース完了」と記載されていたが、実際は:
+1. リポジトリがPrivate（外部アクセス不可）
+2. GitHub Releasesが作成されていない（タグのみ）
+3. インストーラーがアップロードされていない
+
+これは**虚偽報告**であり、品質監査も実施されていなかった。
+
+## 必須作業
+
+### 1. 品質監査実施
+参照: O:\Dev\Work\_orchestrator\governance\rules\release-quality-audit.md
+
+```bash
+# ビルド確認
+cargo build --release
+
+# Clippy
+cargo clippy -- -D warnings
+
+# テスト
+cargo test
+
+# セキュリティ監査
+cargo audit
+
+# フォーマット
+cargo fmt --check
+```
+
+### 2. リポジトリ公開（人間作業が必要）
+- GitHub Settings → Danger Zone → Change visibility → Public
+- human_request_required: true
+
+### 3. 正式リリース作成
+```bash
+# インストーラービルド
+npm run tauri build
+
+# リリース作成
+gh release create v0.1.0 \
+  --title "v0.1.0 - Initial Release" \
+  --notes "初回リリース。ローカルバックアップ・復元機能。" \
+  ./src-tauri/target/release/bundle/nsis/*.exe
+```
+
+### 4. リリース検証
+参照: O:\Dev\Work\_orchestrator\governance\rules\release-verification.md
+
+```bash
+# リリース確認
+gh release view v0.1.0
+
+# URL確認
+curl -I https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.0
+
+# アセット確認
+gh release view v0.1.0 --json assets
+```
+
+### 5. STATUS.md更新
+監査結果を記録し、検証完了後に「リリース完了」と記載。
+
+## 完了条件
+- [ ] 品質監査全項目PASS
+- [ ] リポジトリがPublic
+- [ ] GitHub Releasesが存在
+- [ ] インストーラーがダウンロード可能
+- [ ] リリースURLが200を返す
+- [ ] STATUS.mdに監査結果を記録

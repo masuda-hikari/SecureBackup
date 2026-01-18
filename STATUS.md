@@ -6,25 +6,26 @@
 
 | 項目 | 状態 |
 |------|------|
-| 進捗 | **Phase 1 開発完了・リリース未完了** |
-| フェーズ | Phase 1（ローカルバックアップ+復元）開発完了 |
+| 進捗 | **Phase 1 完了・v0.1.0 公開済み** |
+| フェーズ | Phase 1（ローカルバックアップ+復元）完了 |
 | テスト | 全10件PASS |
 | ビルド | 成功（Rust + React） |
-| リリース | ❌ **未公開**（リポジトリがPrivate、Releases未作成） |
+| リリース | ✅ **公開済み**（Public + GitHub Releases） |
 
-## 🔴 リリース問題（2026-01-18 検出）
+## ✅ リリース完了（2026-01-18）
 
-| 問題 | 状態 |
+| 項目 | 状態 |
 |------|------|
-| リポジトリ公開状態 | ❌ **Private**（外部アクセス不可） |
-| GitHub Releases | ❌ **未作成**（タグのみ存在） |
-| インストーラー | ❌ **未アップロード** |
+| リポジトリ公開状態 | ✅ **Public** |
+| GitHub Releases | ✅ **v0.1.0公開済み** |
+| インストーラー | ✅ **.exe / .msi アップロード済み** |
+| リリースURL | https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.0 |
 
-### 必要な修正作業
-1. [ ] リポジトリをPublicに変更
-2. [ ] `gh release create v0.1.0` でReleases作成
-3. [ ] NSISインストーラーをアップロード
-4. [ ] リリースURL動作確認
+### ダウンロード
+| ファイル | サイズ |
+|----------|--------|
+| SecureBackup_0.1.0_x64-setup.exe | 2.5MB（NSIS推奨） |
+| SecureBackup_0.1.0_x64_en-US.msi | 4.1MB |
 
 ## 完了タスク
 - [x] 市場調査・競合分析
@@ -36,13 +37,14 @@
 - [x] 復元モジュール（restore.rs）
 - [x] 復元用Tauriコマンド（execute_restore, get_backup_info, get_restore_progress）
 - [x] フロントエンド復元UI（タブ切り替え、ファイル選択、進捗表示）
-- [ ] ~~GitHub Releases v0.1.0 公開~~ → **虚偽報告・未完了**
+- [x] GitHub Releases v0.1.0 公開
+- [x] リポジトリPublic化
 
-## 次回アクション（CRITICAL）
-1. **リポジトリ公開** → Private → Public に変更
-2. **正式リリース作成** → `gh release create` でインストーラー含むリリース作成
-3. **リリース検証** → URL動作確認、ダウンロード確認
-4. ランディングページ作成
+## 次回アクション（Phase 2準備）
+1. **ランディングページ作成** → GitHub Pages / Vercelで公開
+2. **SEO最適化** → キーワード「Windows バックアップ 暗号化」対策
+3. **マーケティング** → SNS告知、テックブログ投稿
+4. **Phase 2機能** → クラウドバックアップ（AWS S3/Google Drive連携）
 
 ## 技術スタック
 - Tauri 2.0 (Rust + React/TypeScript)
@@ -53,7 +55,7 @@
 ## 収益化ステータス
 - 目標: ¥10,000/月 (Phase 1)
 - 価格設定: 無料版 + Pro月額$5
-- 進捗: MVP完成、配布準備段階
+- 進捗: **v0.1.0公開完了、マーケティング段階**
 
 ## 実装済み機能
 
