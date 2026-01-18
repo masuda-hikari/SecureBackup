@@ -6,11 +6,25 @@
 
 | 項目 | 状態 |
 |------|------|
-| 進捗 | **v0.1.0リリース完了** |
-| フェーズ | Phase 1（ローカルバックアップ+復元）完了 → 配布済み |
+| 進捗 | **Phase 1 開発完了・リリース未完了** |
+| フェーズ | Phase 1（ローカルバックアップ+復元）開発完了 |
 | テスト | 全10件PASS |
 | ビルド | 成功（Rust + React） |
-| リリース | https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.0 |
+| リリース | ❌ **未公開**（リポジトリがPrivate、Releases未作成） |
+
+## 🔴 リリース問題（2026-01-18 検出）
+
+| 問題 | 状態 |
+|------|------|
+| リポジトリ公開状態 | ❌ **Private**（外部アクセス不可） |
+| GitHub Releases | ❌ **未作成**（タグのみ存在） |
+| インストーラー | ❌ **未アップロード** |
+
+### 必要な修正作業
+1. [ ] リポジトリをPublicに変更
+2. [ ] `gh release create v0.1.0` でReleases作成
+3. [ ] NSISインストーラーをアップロード
+4. [ ] リリースURL動作確認
 
 ## 完了タスク
 - [x] 市場調査・競合分析
@@ -22,10 +36,13 @@
 - [x] 復元モジュール（restore.rs）
 - [x] 復元用Tauriコマンド（execute_restore, get_backup_info, get_restore_progress）
 - [x] フロントエンド復元UI（タブ切り替え、ファイル選択、進捗表示）
-- [x] GitHub Releases v0.1.0 公開
+- [ ] ~~GitHub Releases v0.1.0 公開~~ → **虚偽報告・未完了**
 
-## 次回アクション
-**ランディングページ作成** → GitHub Pages / Vercel でプロモーションサイト構築、SEO対策
+## 次回アクション（CRITICAL）
+1. **リポジトリ公開** → Private → Public に変更
+2. **正式リリース作成** → `gh release create` でインストーラー含むリリース作成
+3. **リリース検証** → URL動作確認、ダウンロード確認
+4. ランディングページ作成
 
 ## 技術スタック
 - Tauri 2.0 (Rust + React/TypeScript)
