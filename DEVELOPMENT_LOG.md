@@ -1,5 +1,39 @@
 # SecureBackup 開発ログ
 
+## 2026-01-21: v0.1.1リリース完了・GitHub Pagesデプロイ
+
+### 実施内容
+1. **GitHub Pages有効化**
+   - リポジトリ設定でPages有効化（master/docs）
+   - URL: https://masuda-hikari.github.io/SecureBackup/
+   - SEO最適化済みランディングページ公開
+
+2. **v0.1.1リリースビルド**
+   - Tauriリリースビルド実行
+   - SecureBackup_0.1.1_x64-setup.exe生成
+   - SecureBackup_0.1.1_x64_en-US.msi生成
+
+3. **GitHub Releases v0.1.1公開**
+   - URL: https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.1
+   - UI/UXエクセレンス対応版
+   - 2つのインストーラーをアップロード
+
+### 生成ファイル
+- GitHub Releases v0.1.1（2インストーラー）
+- GitHub Pages（docs/配下）
+
+### 公開URL
+- **ランディングページ**: https://masuda-hikari.github.io/SecureBackup/
+- **GitHub Releases**: https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.1
+- **リポジトリ**: https://github.com/masuda-hikari/SecureBackup
+
+### 次回アクション（優先順）
+1. **SNS告知実行** - docs/social-posts.mdのコンテンツを投稿
+2. **ユーザーフィードバック収集** - GitHub Issues、SNS反応監視
+3. **Phase 2機能** - クラウドバックアップ対応
+
+---
+
 ## 2026-01-19: ランディングページ作成・SNS告知準備
 
 ### 実施内容

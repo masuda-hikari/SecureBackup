@@ -1,18 +1,29 @@
 ﻿# プロジェクトステータス
 
-最終更新: 2026-01-19
+最終更新: 2026-01-21
 
 ## 概要
 
 | 項目 | 状態 |
 |------|------|
-| 進捗 | **v0.1.1 リリース準備完了** |
-| フェーズ | Phase 1（ローカルバックアップ+復元）完了 → マーケティング段階 |
+| 進捗 | **v0.1.1 リリース完了** |
+| フェーズ | Phase 1（ローカルバックアップ+復元）完了 → SNS告知段階 |
 | テスト | 全10件PASS |
 | ビルド | 成功（Rust + React） |
-| リリース | ✅ v0.1.0公開済み / v0.1.1準備完了 |
+| リリース | ✅ v0.1.0公開済み / ✅ **v0.1.1公開済み** |
+| GitHub Pages | ✅ https://masuda-hikari.github.io/SecureBackup/ |
 
-## ✅ v0.1.1 新機能（2026-01-19）
+## ✅ v0.1.1 リリース完了（2026-01-21）
+
+### GitHub Releases
+- **URL**: https://github.com/masuda-hikari/SecureBackup/releases/tag/v0.1.1
+- **SecureBackup_0.1.1_x64-setup.exe** - NSIS推奨インストーラー
+- **SecureBackup_0.1.1_x64_en-US.msi** - MSI企業向けインストーラー
+
+### GitHub Pages
+- **URL**: https://masuda-hikari.github.io/SecureBackup/
+- ランディングページ公開完了
+- SEO最適化済み（OGP/Twitter Card/Schema.org）
 
 ### ランディングページ（docs/）
 | 項目 | 状態 |
@@ -91,21 +102,23 @@
 
 ## 次回アクション（優先順）
 
-1. **GitHub Pagesデプロイ設定**
-   - リポジトリSettings → Pages → Source: master/docs
-   - URL: https://masuda-hikari.github.io/SecureBackup/
-
-2. **v0.1.1リリース**
-   - バージョン番号更新済み（Cargo.toml, package.json, tauri.conf.json）
-   - リリースビルド実行 → GitHub Releases公開
-
-3. **SNS告知実行**
+1. **SNS告知実行**
    - docs/social-posts.md のコンテンツを使用
-   - X(Twitter), Reddit投稿
+   - X(Twitter)投稿、Reddit投稿（r/rust, r/windows）
+   - Qiita/Zenn技術記事公開
 
-4. **Phase 2機能**
+2. **ユーザーフィードバック収集**
+   - GitHub Issues監視
+   - SNSでの反応追跡
+   - 機能リクエスト収集
+
+3. **Phase 2機能**
    - クラウドバックアップ（AWS S3/Google Drive連携）
    - スケジュール実行（Windowsタスクスケジューラ連携）
+
+4. **Pro版実装**
+   - Stripe決済統合
+   - ライセンス管理システム
 
 ## 技術スタック
 - Tauri 2.0 (Rust + React/TypeScript)
