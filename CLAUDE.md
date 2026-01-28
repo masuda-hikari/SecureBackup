@@ -9,6 +9,19 @@
 
 継承: O:\Dev\CLAUDE.md → O:\Dev\Work\_orchestrator\CLAUDE.md → このファイル
 
+
+## 進捗率の正しい認識（CRITICAL）
+
+**進捗100% = 1000万円の現金収入を得た瞬間**
+
+- 現在の収益: 0円
+- 現在の進捗: **0%**
+- コード完成・テスト通過・ビルド成功は進捗ではない
+- 収益が発生して初めて進捗がカウントされる
+- 批判的思考を維持し、楽観的な報告を避けること
+
+参照: `O:\Dev\Work\_orchestrator\governance\rules\progress-definition-critical.md`
+
 ## 開発規範（共通）
 
 ### 言語設定
