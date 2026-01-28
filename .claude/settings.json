@@ -1,4 +1,14 @@
-﻿{
+{
+  "environment": {
+    "python_version": ">=3.11",
+    "platform": "windows"
+  },
+  "model": "sonnet",
+  "project": {
+    "description": "SecureBackup - AI automation project",
+    "name": "SecureBackup",
+    "type": "python"
+  },
   "permissions": {
     "allow": [
       "Bash(python:*)",
@@ -15,14 +25,5 @@
       "Grep"
     ],
     "deny": []
-  },
-  "environment": {
-    "python_version": ">=3.11",
-    "platform": "windows"
-  },
-  "project": {
-    "description": "SecureBackup - AI automation project",
-    "name": "SecureBackup",
-    "type": "python"
   }
 }

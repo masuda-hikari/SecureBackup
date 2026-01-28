@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿<!-- GOVERNANCE:BEGIN -->
+﻿﻿﻿﻿﻿<!-- GOVERNANCE:BEGIN -->
 <!-- 
   このセクションはオーケストレーターによって管理されています。
   手動編集は次回同期時に上書きされます。
@@ -101,3 +101,26 @@ TEMPLATE_VERSION: 2.0
 LAST_SYNC: 2026-01-18
 ORCHESTRATOR_MANAGED: true
 -->
+
+
+## 統合効率化システム適用
+
+**このプロジェクトは Claude Code 最大効率化システムの適用対象です。**
+
+### 適用モジュール
+- Context Cache: トークン削減30%
+- Template Engine: コード再利用促進
+- Revenue Planner: 収益逆算タスク生成
+- Predictive Engine: 次タスク自動予測
+- Code Learning Engine: コード品質自動進化
+
+### 設定
+詳細設定: `O:\Dev\Work\_orchestrator\config\max_efficiency_config.json`
+
+### モデル選択ルール
+- プランニング・詳細設計: **opus**
+- 実装・ビルド・検証: **sonnet** (デフォルト)
+- ログ記録・軽量タスク: **haiku**
+
+### Revenue Planner
+収益目標達成のためのタスクは `/revenue-tasks` で自動生成されます。
